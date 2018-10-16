@@ -1,0 +1,14 @@
+<expr> ::= <expr> "+" <term> | <expr> "-" <term>
+         | <term>
+
+<term> ::= <term> "*" <negation> | <term> "/" <negation>
+         | <negation>
+
+<negation> ::= "-" <factor>
+         | <factor>
+
+<factor> ::= <paren> "^" <factor>
+         | <paren>
+
+<paren> ::= "(" <expr> ")"
+         | number

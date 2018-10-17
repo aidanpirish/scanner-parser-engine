@@ -1,19 +1,19 @@
 <program> ::= <statement> 
             | <statement> <program>
 
-<statement> ::=  <command> ";" 
+<statement> ::=  <print> ";" 
             | <assignment> ";"
 
-<assignment> ::= <name> "=" <expr> 
-            | <name> "=" <command>
+<assignment> ::= name "=" <expr> 
 
-<command> ::= <keyword> <expr>
+<print> ::= "print" <arguments>
 
-<keyword> ::= "print"
-              | "input"
+<arguments> ::= <expr> | <string> | 
+
+<string> ::= "\"" chars "\""
 
 <expr> ::= <expr> "+" <term> | <expr> "-" <term>
-         | <term>
+         | <term> | input
 
 <term> ::= <term> "*" <negation> | <term> "/" <negation>
          | <negation>

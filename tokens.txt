@@ -1,6 +1,6 @@
 PLUS \+
 MINUS \-
-TIMES \-
+MULT \-
 DIV /
 PWR ^
 LPAREN \(

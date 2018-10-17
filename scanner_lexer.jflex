@@ -26,7 +26,7 @@ import java_cup.runtime.Symbol;
 
     \* {
         System.out.println("*");
-        return new Symbol(AlgebraParserSym.TIMES);
+        return new Symbol(AlgebraParserSym.MULT);
     }
 
     \/ {
@@ -36,7 +36,7 @@ import java_cup.runtime.Symbol;
 
     \^ {
         System.out.println("^");
-        return new Symbol(AlgebraParserSym.POWER);
+        return new Symbol(AlgebraParserSym.PWR);
 
     }
 

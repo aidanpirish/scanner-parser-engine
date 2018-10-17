@@ -1,0 +1,28 @@
+<program> ::= <statement> 
+            | <statement> <program>
+
+<statement> ::=  <command> ";" 
+            | <assignment> ";"
+
+<assignment> ::= <name> "=" <expr> 
+            | <name> "=" <command>
+
+<command> ::= <keyword> <expr>
+
+<keyword> ::= "print"
+              | "input"
+
+<expr> ::= <expr> "+" <term> | <expr> "-" <term>
+         | <term>
+
+<term> ::= <term> "*" <negation> | <term> "/" <negation>
+         | <negation>
+
+<negation> ::= "-" <factor>
+         | <factor>
+
+<factor> ::= <paren> "^" <factor>
+         | <paren>
+
+<paren> ::= "(" <expr> ")"
+         | number

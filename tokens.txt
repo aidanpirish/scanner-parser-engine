@@ -1,7 +1,8 @@
+EQUALS \=
 PLUS \+
 MINUS \-
 MULT \-
-DIV /
+DIV \/
 PWR ^
 LPAREN \(
 RPAREN \)

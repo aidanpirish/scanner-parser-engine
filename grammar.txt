@@ -1,3 +1,5 @@
+;Authors: Aidan Irish, Aidan Crump, Muhammad Hassan Rao
+
 <program> ::= <statement> 
             | <statement> <program>
 

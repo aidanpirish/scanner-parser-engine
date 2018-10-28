@@ -3,6 +3,7 @@
 import java_cup.runtime.Symbol;
 
 // We are using LangScanner instead of AlgebraScanner
+// Additonal token types: COMMA, PRINT, INPUT, SEMI, EQUAL, QUOTE
 %%
 
 %class LangScanner
@@ -51,6 +52,31 @@ import java_cup.runtime.Symbol;
     \) {
         System.out.println(")");
         return new Symbol(LangParserSym.RPAREN);
+    }
+
+    \, {
+      System.out.println(",");
+        return new Symbol(LangParserSym.COMMA);
+    }
+
+    \; {
+      System.out.println(";");
+        return new Symbol(LangParserSym.SEMI);
+    }
+
+    \= {
+      System.out.println("=");
+        return new Symbol(LangParserSym.EQUAL);
+    }
+
+    \"(.*?)\" {
+      System.out.println("Word: " + yytext());
+        return new Symbol(LangParserSym.WORD, yytext());
+    }
+
+    (print)+ {
+      System.out.println("Print");
+        return new Symbol(LangParserSym.PRINT);
     }
 
     [0-9]+(\.[0-9]+)? {

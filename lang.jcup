@@ -16,15 +16,29 @@ scan with {:
 // Specification of the grammar
 
 // Types of terminals and non-terminals (rules)
-terminal        PLUS, MINUS, TIMES, DIVIDE, POWER, LPAREN, RPAREN;
+terminal        PLUS, MINUS, TIMES, DIVIDE, POWER, LPAREN, RPAREN, PRINT, COMMA, SEMI;
 terminal Double NUMBER; // NUMBER terminals (tokens) have data type Double
 terminal String IDENTIFIER; // IDENTIFIER terminals (tokens) have data type String
 
 non terminal Node expr, term, negation, power, paren;
 
 // Rules
+// I use "printline" instead of print to avoid confusion with token
 
+program ::= statement:a
+        | statement:a program:b
 
+statement ::= printline:a SEMI
+          | assignment:a SEMI
+
+assignment ::= name:a EQUAL expr:b
+
+printline ::= PRINT arguments:a
+
+arguments ::= expr:a
+              | QUOTE string:a QUOTE
+
+string ::= WORD
 
 expr ::= expr:a PLUS term:b   {: RESULT = new PlusNode(a, b); :}
     | expr:a MINUS term:b     {: RESULT = new MinusNode(a, b); :}

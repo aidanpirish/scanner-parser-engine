@@ -2,8 +2,8 @@ class AlgebraParser;
 
 // Code to be included in the generated parser class
 parser code {:
-    AlgebraScanner scanner;
-    public AlgebraParser(AlgebraScanner scanner) {
+    LangScanner scanner;
+    public LangParser(LangScanner scanner) {
         this.scanner = scanner;
     }
 :}
@@ -16,11 +16,11 @@ scan with {:
 // Specification of the grammar
 
 // Types of terminals and non-terminals (rules)
-terminal        PLUS, MINUS, TIMES, DIVIDE, POWER, LPAREN, RPAREN, PRINT, COMMA, SEMI;
+terminal        PLUS, MINUS, TIMES, DIVIDE, POWER, LPAREN, RPAREN, PRINT, COMMA, SEMI, EQUAL;
 terminal Double NUMBER; // NUMBER terminals (tokens) have data type Double
-terminal String IDENTIFIER; // IDENTIFIER terminals (tokens) have data type String
+terminal String IDENTIFIER, WORD; // IDENTIFIER terminals (tokens) have data type String
 
-non terminal Node expr, term, negation, power, paren;
+non terminal String program, statement, assignment, printline, arguments, string, expr, term, negation, power, paren;
 
 // Rules
 // I use "printline" instead of print to avoid confusion with token
@@ -40,25 +40,25 @@ arguments ::= expr:a
 
 string ::= WORD
 
-expr ::= expr:a PLUS term:b   {: RESULT = new PlusNode(a, b); :}
-    | expr:a MINUS term:b     {: RESULT = new MinusNode(a, b); :}
+expr ::= expr:a PLUS term:b   {: RESULT = a+b; :}
+    | expr:a MINUS term:b     {: RESULT = a-b; :}
     | term:a                  {: RESULT = a; :}
 ;
 
-term ::= term:a TIMES negation:b  {: RESULT = new TimesNode(a, b); :}
-    | term:a DIVIDE negation:b    {: RESULT = new DivideNode(a, b); :}
+term ::= term:a TIMES negation:b  {: RESULT = a*b; :}
+    | term:a DIVIDE negation:b    {: RESULT =  a/b; :}
     | negation:a                  {: RESULT = a; :}
 ;
 
-negation ::= MINUS power:a        {: RESULT = new MinusNode(new ValueNode(0), a); :}
+negation ::= MINUS power:a        {: RESULT = a; :}
     | power:a                     {: RESULT = a; :}
 ;
 
-power ::= paren:a POWER power:b   {: RESULT = new PowerNode(a, b); :}
+power ::= paren:a POWER power:b   {: RESULT = a**b; :}
     | paren:a                     {: RESULT = a; :}
 ;
 
 paren ::= LPAREN expr:a RPAREN    {: RESULT = a; :}
-    | NUMBER:x                    {: RESULT = new ValueNode(x); :}
-    | IDENTIFIER:name             {: RESULT = new VariableNode(name); :}
+    | NUMBER:x                    {: RESULT = x; :}
+    | IDENTIFIER:name             {: RESULT = name; :}
 ;
